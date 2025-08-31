@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+          let product1 = {
+        company : 'mango',
+        type : 't-shirt',
+        price : 861,
+     };
+     
+          let product2 = {
+        company : 'mango',
+        type : 't-shirt',
+        price : 861,
+        'delivery-time' : 'same day'
+     };
+          
+     console.log(isIdenticalProduct(product1,product2));
+
+        function isIdenticalProduct(product1,product2){
+            //validating obj type 
+            if (typeof product1 !== 'object' ||typeof product2 !== 'object'  ){
+           console.warn ('parameter is not an obj');
+           return false;
+         } 
+         if (product1 == product2) { //reference check
+            console.log('on the same reference')
+            return true;
+         }
+         
+       if  (product1.company === product2.company && product1.type === product2.type && product1.price === product2.price ){
+        console.log('equal');
+             return true;
+       }
+       else{
+        console.log('not equal');
+        return false;
+       }
+        }
+    </script>
+</body>
+</html>
