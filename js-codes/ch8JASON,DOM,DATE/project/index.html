@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Bat Ball Wicket Game</h1>
+    <button
+      onclick="let computerChoice = generateComputerChoice();
+               let resultMsg =  getResult(computerChoice,'Bat');
+               showResult('Bat',computerChoice,resultMsg);
+               "
+    >
+      Bat
+    </button>
+
+    <button
+      onclick=" computerChoice =  generateComputerChoice();
+                  resultMsg = getResult(computerChoice,'Ball');
+                 showResult('Ball',computerChoice,resultMsg);"
+    >
+      Ball
+    </button>
+
+    <button
+      onclick="UserChoiceMsg =''; 
+     computerChoice = generateComputerChoice();
+    resultMsg = getResult(computerChoice,'wicket');
+     showResult('wicket',computerChoice,resultMsg);"
+    >
+      Wicket
+    </button>
+
+    <button onclick="localStorage.clear()
+          ResetScore();
+    "> reset score (plz refresh)</button>
+    <script>
+      let Score;
+      let scoreStr = localStorage.getItem('Score');
+       ResetScore(scoreStr);
+      function ResetScore(scoreStr) {
+        
+       Score = scoreStr ? JSON.parse(scoreStr) : {
+         Win: 0,
+        loss: 0,
+        Tie: 0,
+      };
+
+    //   if (scoreStr !== undefined) {
+    //      Score = JSON.parse(scoreStr);
+    //   } else {
+    //    Score = {
+    //     Win: 0,
+    //     loss: 0,
+    //     Tie: 0,
+     
+    //   };
+    // }
+
+      Score.displayScore = function() {
+          return `Won:${Score.Win} loose:${Score.loss} Tie:${Score.Tie}`;
+        }
+      }
+      function generateComputerChoice() {
+        let randomNumber = Math.random() * 3;
+        if (randomNumber > 0 && randomNumber <= 1) {
+          return "Bat";
+          // console.log('computer choosed bat')
+        } else if (randomNumber > 1 && randomNumber <= 2) {
+          return "Ball";
+          // console.log('computer choosed ball')
+        } else {
+          return "wicket";
+          // console.log('computer choosed wicket')
+        }
+      }
+
+      function getResult(userMove, computerChoice) {
+        if (userMove === "Bat") {
+          if (computerChoice === "Bat") {
+            Score.Tie++;
+            return "this is a tie..!!";
+          } else if (computerChoice === "Ball") {
+            Score.Win++;
+            return "you won";
+          } else {
+            Score.loss++;
+            return "computer won..!!";
+          }
+        } else if (userMove === "Ball") {
+          if (computerChoice === "Ball") {
+            Score.Tie++;
+            return "this is a tie..!!";
+          } else if (computerChoice === "Bat") {
+            Score.loss++;
+            return "computer won";
+          } else if (computerChoice === "wicket") {
+            Score.Win++;
+            return "you won..!!";
+          }
+        } else if (userMove === "wicket") {
+          if (computerChoice === "wicket") {
+            Score.Tie++;
+            return "this is a tie..!!!";
+          } else if (computerChoice === "Ball") {
+            Score.loss++;
+            return "computer won";
+          } else if (computerChoice === "Bat") {
+            Score.Win++;
+            return "you won..!!";
+          }
+        }
+      }
+      function showResult(userMove, computerMove, result) {
+        localStorage.setItem('Score',JSON.stringify(Score));
+        alert(`you have chosen ${userMove} computer choice is ${computerMove}
+  (${result})
+  ${Score.displayScore()}`);
+}
+    </script>
+  </body>
+</html>
