@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pe1/2/3</title>
+</head>
+<style>
+    body{
+        background-color: rgb(1, 6, 8);
+         color: rosybrown ;
+    }
+</style>
+<body>
+    <h3 id="greeting"></h3>
+    <h4 id = "time"></h4>
+    <button id="my-button" onclick="noOfTimesClicked();">0</button>
+    <script>
+        let clicksNo = 0;
+       function noOfTimesClicked() {
+       let button = document.querySelector('#my-button');
+        clicksNo++;
+        button.innerText = clicksNo; 
+       }
+
+        let date = new Date();
+        let hour = date.getHours();
+        let heading = document.querySelector('#greeting');
+        let time = document.querySelector('#time')
+        dogreeting('Mohit');
+     
+
+        time.innerText = `The time is : ${date.toLocaleTimeString()}`;
+     function dogreeting(personName  = 'Dear') {
+         if (hour > 5 && hour < 12) {
+        heading.innerText = `good morning ${personName}`;
+      
+       } else if(hour > 12 && hour < 18){
+        heading.innerText =`good after noon  ${personName}`;
+     }else if(hour > 18 && hour < 20){
+       heading.innerText =`good evening  ${personName}`;
+     }else{
+      heading.innerText = `good night  ${personName}`;
+     }
+
+     }
+    
+    </script>
+</body>
+</html>
